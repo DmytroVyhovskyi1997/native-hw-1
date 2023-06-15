@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, Dimensions, ImageBackground, TextInput, View, Text, Button } from "react-native";
+import { StyleSheet, Dimensions, ImageBackground, TextInput, View, Text, TouchableOpacity } from "react-native";
 
 export const RegistrationScreen = () => {
-    const [password, setPassword] = useState(false)
+    
   return (
     <ImageBackground
       source={require("../assets/image/photo-bg.jpg")}
@@ -30,10 +30,12 @@ export const RegistrationScreen = () => {
             style={styles.input}
             placeholder="Пароль"
             placeholderTextColor="#BDBDBD"
-            secureTextEntry={setPassword}
+            secureTextEntry={true}
           />
-              </View>
-                <Button style={styles.submitTitle} title="Зареєструватися"/>
+        </View>
+        <TouchableOpacity style={styles.submitBtn} activeOpacity={0.8}>
+          <Text style={styles.submitTitle}>Зареєструватися</Text>
+        </TouchableOpacity>
         <Text style={styles.logo}>Вже є акаунт? Увійти</Text>
       </View>
     </ImageBackground>
@@ -61,7 +63,20 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
+  submitBtn: {
+    marginRight: 16,
+    marginLeft: 16,
+    height: 51,
+    backgroundColor: "#FF6C00",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
+    marginBottom: 16,
+    marginTop: 43,
+  },
   submitTitle: {
+    paddingVertical: 16,
+    paddingHorizontal: 32,
     color: "#FFFFFF",
     textAlign: "center",
   },
