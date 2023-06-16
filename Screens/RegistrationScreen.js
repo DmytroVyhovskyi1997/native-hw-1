@@ -1,16 +1,38 @@
 import React, { useState } from "react";
-import { StyleSheet, Dimensions, ImageBackground, TextInput, View, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Dimensions,
+  ImageBackground,
+  TextInput,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
 export const RegistrationScreen = () => {
-    
+  const [image, setImage] = useState(null);
   return (
     <ImageBackground
       source={require("../assets/image/photo-bg.jpg")}
       style={styles.image}
     >
       <View style={styles.form}>
+        <View style={styles.formAvatar}>
+          <TouchableOpacity>
+            <Image
+              source={{ uri: image }}
+              style={{ width: 120, height: 120, borderRadius: 16 }}
+            />
+            <Image
+              source={require("../assets/image/add.jpg")}
+              style={styles.add}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.inputTitle}>Реєстрація</Text>
         <View>
-          <Text style={styles.inputTitle}>Реєстрація</Text>
           <TextInput
             style={styles.input}
             placeholder="Логін"
@@ -36,7 +58,7 @@ export const RegistrationScreen = () => {
         <TouchableOpacity style={styles.submitBtn} activeOpacity={0.8}>
           <Text style={styles.submitTitle}>Зареєструватися</Text>
         </TouchableOpacity>
-        <Text style={styles.logo}>Вже є акаунт? Увійти</Text>
+        <Text style={styles.logIn}>Вже є акаунт? Увійти</Text>
       </View>
     </ImageBackground>
   );
@@ -54,6 +76,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+  },
+  formAvatar: {
+    top: -60,
+    width: 120,
+    height: 120,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+    zIndex: 999,
+  },
+  add: {
+    position: "absolute",
+    top: 81,
+    right: -10,
+    
   },
   image: {
     flex: 1,
@@ -80,7 +116,12 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     textAlign: "center",
   },
-  inputTitle: {},
+  inputTitle: {
+    textAlign: "center",
+    color: "#212121",
+    paddingTop: 92,
+    fontSize: 30,
+  },
   input: {
     width: 343,
     height: 50,
@@ -100,5 +141,13 @@ const styles = StyleSheet.create({
     letterSpacing: 0.01,
     color: "#212121",
     marginBottom: 33,
+  },
+  logIn: {
+    fontStyle: "normal",
+    fontWeight: 400,
+    fontSize: 16,
+    lineHeight: 19,
+    textAlign: "center",
+    color: "#1B4371",
   },
 });
