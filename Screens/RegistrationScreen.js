@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  KeyboardAvoidingView
 } from "react-native";
 
 export const RegistrationScreen = () => {
@@ -18,47 +19,49 @@ export const RegistrationScreen = () => {
       style={styles.image}
     >
       <View style={styles.form}>
-        <View style={styles.formAvatar}>
-          <TouchableOpacity>
-            <Image
-              source={{ uri: image }}
-              style={{ width: 120, height: 120, borderRadius: 16 }}
+        <KeyboardAvoidingView>
+          <View style={styles.formAvatar}>
+            <TouchableOpacity>
+              <Image
+                source={{ uri: image }}
+                style={{ width: 120, height: 120, borderRadius: 16 }}
+              />
+              <Image
+                source={require("../assets/image/add.jpg")}
+                style={styles.add}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.inputTitle}>Реєстрація</Text>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Логін"
+              placeholderTextColor="#BDBDBD"
             />
-            <Image
-              source={require("../assets/image/add.jpg")}
-              style={styles.add}
+          </View>
+
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Адреса електронної пошти"
+              placeholderTextColor="#BDBDBD"
             />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Пароль"
+              placeholderTextColor="#BDBDBD"
+              secureTextEntry={true}
+            />
+          </View>
+          <TouchableOpacity style={styles.submitBtn} activeOpacity={0.8}>
+            <Text style={styles.submitTitle}>Зареєструватися</Text>
           </TouchableOpacity>
-        </View>
-
-        <Text style={styles.inputTitle}>Реєстрація</Text>
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Логін"
-            placeholderTextColor="#BDBDBD"
-          />
-        </View>
-
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Адреса електронної пошти"
-            placeholderTextColor="#BDBDBD"
-          />
-        </View>
-        <View>
-          <TextInput
-            style={styles.input}
-            placeholder="Пароль"
-            placeholderTextColor="#BDBDBD"
-            secureTextEntry={true}
-          />
-        </View>
-        <TouchableOpacity style={styles.submitBtn} activeOpacity={0.8}>
-          <Text style={styles.submitTitle}>Зареєструватися</Text>
-        </TouchableOpacity>
-        <Text style={styles.logIn}>Вже є акаунт? Увійти</Text>
+          <Text style={styles.logIn}>Вже є акаунт? Увійти</Text>
+        </KeyboardAvoidingView>
       </View>
     </ImageBackground>
   );
@@ -79,6 +82,7 @@ const styles = StyleSheet.create({
   },
   formAvatar: {
     top: -60,
+    left:"26%",
     width: 120,
     height: 120,
     backgroundColor: "#F6F6F6",
@@ -89,7 +93,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 81,
     right: -10,
-    
   },
   image: {
     flex: 1,
