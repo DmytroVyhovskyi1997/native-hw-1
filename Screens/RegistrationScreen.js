@@ -8,7 +8,8 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 export const RegistrationScreen = () => {
@@ -18,8 +19,11 @@ export const RegistrationScreen = () => {
       source={require("../assets/image/photo-bg.jpg")}
       style={styles.image}
     >
-      <View style={styles.form}>
-        <KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ ...styles.form }}
+      >
+        <View>
           <View style={styles.formAvatar}>
             <TouchableOpacity>
               <Image
@@ -61,8 +65,8 @@ export const RegistrationScreen = () => {
             <Text style={styles.submitTitle}>Зареєструватися</Text>
           </TouchableOpacity>
           <Text style={styles.logIn}>Вже є акаунт? Увійти</Text>
-        </KeyboardAvoidingView>
-      </View>
+        </View>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };
@@ -70,8 +74,9 @@ export const RegistrationScreen = () => {
 const styles = StyleSheet.create({
   form: {
     marginHorizontal: 40,
+    marginBottom: 32,
     width: "100%",
-    height: "85%",
+    minHeight: "90%",
     left: 0,
     top: 263,
     backgroundColor: "#FFFFFF",
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
   },
   formAvatar: {
     top: -60,
-    left:"26%",
+    left: "26%",
     width: 120,
     height: 120,
     backgroundColor: "#F6F6F6",
@@ -152,5 +157,6 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
+    marginBottom: 78,
   },
 });

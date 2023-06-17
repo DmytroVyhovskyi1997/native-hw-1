@@ -8,26 +8,29 @@ import {
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
-export const RegistrationScreen = () => {
+export const LoginScreen = () => {
+  const [isShowKeyboard, setIsShowKeyboard ] = useState(false)
   return (
     <ImageBackground
       source={require("../assets/image/photo-bg.jpg")}
       style={styles.image}
     >
-      <View style={styles.form}>
-        <KeyboardAvoidingView>
-      
-
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ ...styles.form }}
+      >
+        <View>
           <Text style={styles.inputTitle}>Увійти</Text>
-      
 
           <View>
             <TextInput
               style={styles.input}
               placeholder="Адреса електронної пошти"
               placeholderTextColor="#BDBDBD"
+              onFocus={() => setIsShowKeyboard(true)}
             />
           </View>
           <View>
@@ -36,14 +39,16 @@ export const RegistrationScreen = () => {
               placeholder="Пароль"
               placeholderTextColor="#BDBDBD"
               secureTextEntry={true}
+              onFocus={() => setIsShowKeyboard(true)}
             />
           </View>
+
           <TouchableOpacity style={styles.submitBtn} activeOpacity={0.8}>
             <Text style={styles.submitTitle}>Увійти</Text>
           </TouchableOpacity>
           <Text style={styles.logIn}>Немає акаунту? Зареєструватися</Text>
-        </KeyboardAvoidingView>
-      </View>
+        </View>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };
@@ -52,11 +57,10 @@ const styles = StyleSheet.create({
   form: {
     marginHorizontal: 40,
     width: "100%",
-    height: "85%",
+        height: "75%",
     left: 0,
     top: 263,
     backgroundColor: "#FFFFFF",
-    position: "relative",
     alignItems: "center",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -87,12 +91,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     textAlign: "center",
   },
-  inputTitle: {
-    textAlign: "center",
-    color: "#212121",
-    paddingTop: 92,
-    fontSize: 30,
-  },
   input: {
     width: 343,
     height: 50,
@@ -111,7 +109,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     letterSpacing: 0.01,
     color: "#212121",
-    marginBottom: 33,
+      marginBottom: 33,
+    marginTop:32,
   },
   logIn: {
     fontStyle: "normal",
