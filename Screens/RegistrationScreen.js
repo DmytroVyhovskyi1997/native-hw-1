@@ -10,10 +10,17 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  Keyboard,
 } from "react-native";
 
 export const RegistrationScreen = () => {
   const [image, setImage] = useState(null);
+    const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
+    const keyboardHide = () => {
+      setIsShowKeyboard(true);
+      Keyboard.dismiss();
+    };
   return (
     <ImageBackground
       source={require("../assets/image/photo-bg.jpg")}
@@ -43,6 +50,7 @@ export const RegistrationScreen = () => {
               style={styles.input}
               placeholder="Логін"
               placeholderTextColor="#BDBDBD"
+              onFocus={() => setIsShowKeyboard(true)}
             />
           </View>
 
@@ -51,6 +59,7 @@ export const RegistrationScreen = () => {
               style={styles.input}
               placeholder="Адреса електронної пошти"
               placeholderTextColor="#BDBDBD"
+              onFocus={() => setIsShowKeyboard(true)}
             />
           </View>
           <View>
@@ -59,9 +68,14 @@ export const RegistrationScreen = () => {
               placeholder="Пароль"
               placeholderTextColor="#BDBDBD"
               secureTextEntry={true}
+              onFocus={() => setIsShowKeyboard(true)}
             />
           </View>
-          <TouchableOpacity style={styles.submitBtn} activeOpacity={0.8}>
+          <TouchableOpacity
+            style={styles.submitBtn}
+            activeOpacity={0.8}
+            onPress={keyboardHide}
+          >
             <Text style={styles.submitTitle}>Зареєструватися</Text>
           </TouchableOpacity>
           <Text style={styles.logIn}>Вже є акаунт? Увійти</Text>
@@ -74,13 +88,8 @@ export const RegistrationScreen = () => {
 const styles = StyleSheet.create({
   form: {
     marginHorizontal: 40,
-    marginBottom: 32,
     width: "100%",
-    minHeight: "90%",
-    left: 0,
-    top: 263,
     backgroundColor: "#FFFFFF",
-    position: "relative",
     alignItems: "center",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -101,7 +110,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     resizeMode: "cover",
     alignItems: "center",
     width: Dimensions.get("window").width,

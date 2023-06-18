@@ -9,47 +9,79 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 
+const inatialState = {
+  email: "",
+  password: "",
+}
+
 export const LoginScreen = () => {
-  const [isShowKeyboard, setIsShowKeyboard ] = useState(false)
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [ state, setState]= useState(inatialState)
+
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    console.log(state)
+  };
+  
+
+
   return (
-    <ImageBackground
-      source={require("../assets/image/photo-bg.jpg")}
-      style={styles.image}
-    >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ ...styles.form }}
+    <TouchableWithoutFeedback onPress={keyboardHide}>
+      <ImageBackground
+        source={require("../assets/image/photo-bg.jpg")}
+        style={styles.image}
       >
-        <View>
-          <Text style={styles.inputTitle}>Увійти</Text>
+        <TouchableWithoutFeedback onPress={keyboardHide}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ ...styles.form }}
+          >
+            <View>
+              <Text style={styles.inputTitle}>Увійти</Text>
+              <View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Адреса електронної пошти"
+                  placeholderTextColor="#BDBDBD"
+                  onFocus={() => setIsShowKeyboard(true)}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, email: value }))
+                  }
+                />
+              </View>
+              <View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Пароль"
+                  placeholderTextColor="#BDBDBD"
+                  secureTextEntry={true}
+                  onFocus={() => setIsShowKeyboard(true)}
+                  onChangeText={(value) =>
+                    setState((prevState) => ({ ...prevState, password: value }))
+                  }
+                />
+              </View>
 
-          <View>
-            <TextInput
-              style={styles.input}
-              placeholder="Адреса електронної пошти"
-              placeholderTextColor="#BDBDBD"
-              onFocus={() => setIsShowKeyboard(true)}
-            />
-          </View>
-          <View>
-            <TextInput
-              style={styles.input}
-              placeholder="Пароль"
-              placeholderTextColor="#BDBDBD"
-              secureTextEntry={true}
-              onFocus={() => setIsShowKeyboard(true)}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.submitBtn} activeOpacity={0.8}>
-            <Text style={styles.submitTitle}>Увійти</Text>
-          </TouchableOpacity>
-          <Text style={styles.logIn}>Немає акаунту? Зареєструватися</Text>
-        </View>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+              <TouchableOpacity
+                style={styles.submitBtn}
+                activeOpacity={0.8}
+                onPress={keyboardHide}
+              >
+                <Text style={styles.submitTitle}>Увійти</Text>
+              </TouchableOpacity>
+              <Text style={{ ...styles.logIn }}>
+                Немає акаунту? Зареєструватися
+              </Text>
+            </View>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -57,18 +89,15 @@ const styles = StyleSheet.create({
   form: {
     marginHorizontal: 40,
     width: "100%",
-        height: "75%",
-    left: 0,
-    top: 263,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
- 
+
   image: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     resizeMode: "cover",
     alignItems: "center",
     width: Dimensions.get("window").width,
@@ -109,8 +138,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     letterSpacing: 0.01,
     color: "#212121",
-      marginBottom: 33,
-    marginTop:32,
+    marginBottom: 33,
+    marginTop: 32,
   },
   logIn: {
     fontStyle: "normal",
@@ -119,5 +148,6 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
+    marginBottom:144,
   },
 });
