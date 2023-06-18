@@ -13,13 +13,22 @@ import {
   Keyboard,
 } from "react-native";
 
+const inatialState = {
+  logIn:"",
+  email: "",
+  password: "",
+};
+
 export const RegistrationScreen = () => {
   const [image, setImage] = useState(null);
-    const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+   const [state, setState] = useState(inatialState);
 
     const keyboardHide = () => {
       setIsShowKeyboard(true);
       Keyboard.dismiss();
+      console.log(state);
+      setState(inatialState);
     };
   return (
     <ImageBackground
@@ -51,6 +60,10 @@ export const RegistrationScreen = () => {
               placeholder="Логін"
               placeholderTextColor="#BDBDBD"
               onFocus={() => setIsShowKeyboard(true)}
+              value={state.login}
+              onChangeText={(value) =>
+                setState((prevState) => ({ ...prevState, login: value }))
+              }
             />
           </View>
 
@@ -60,6 +73,10 @@ export const RegistrationScreen = () => {
               placeholder="Адреса електронної пошти"
               placeholderTextColor="#BDBDBD"
               onFocus={() => setIsShowKeyboard(true)}
+              value={state.email}
+              onChangeText={(value) =>
+                setState((prevState) => ({ ...prevState, email: value }))
+              }
             />
           </View>
           <View>
@@ -69,6 +86,10 @@ export const RegistrationScreen = () => {
               placeholderTextColor="#BDBDBD"
               secureTextEntry={true}
               onFocus={() => setIsShowKeyboard(true)}
+              value={state.password}
+              onChangeText={(value) =>
+                setState((prevState) => ({ ...prevState, password: value }))
+              }
             />
           </View>
           <TouchableOpacity

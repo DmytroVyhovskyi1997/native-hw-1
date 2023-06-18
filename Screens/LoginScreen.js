@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Font } from "expo";
 import {
   StyleSheet,
   Dimensions,
@@ -13,23 +14,38 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-const inatialState = {
+import AppLoading from "expo-app-loading";
+
+
+
+const initialState = {
   email: "",
   password: "",
 }
 
-export const LoginScreen = () => {
+export default function LoginScreen  ()  {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  const [ state, setState]= useState(inatialState)
+  const [state, setState] = useState(initialState);
+  const [isReady, setIsReady] = useState(false);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
     console.log(state)
+    setState(initialState)
+  };
+
+  const loadApplication = async () => {
+    await Font.loadAsync({
+      "BebasNeue-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+    });
+    setIsReady(true);
   };
   
 
-
+  if (!isReady) {
+    return <AppLoading startAsync={loadApplication} onFinish={() => setIsReady(true)} onError={ console.war} />
+}
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
@@ -49,6 +65,7 @@ export const LoginScreen = () => {
                   placeholder="Адреса електронної пошти"
                   placeholderTextColor="#BDBDBD"
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.email}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, email: value }))
                   }
@@ -61,6 +78,7 @@ export const LoginScreen = () => {
                   placeholderTextColor="#BDBDBD"
                   secureTextEntry={true}
                   onFocus={() => setIsShowKeyboard(true)}
+                  value={state.password}
                   onChangeText={(value) =>
                     setState((prevState) => ({ ...prevState, password: value }))
                   }
@@ -116,6 +134,7 @@ const styles = StyleSheet.create({
   },
   submitTitle: {
     paddingVertical: 16,
+    fontFamily: "Arial",
     paddingHorizontal: 32,
     color: "#FFFFFF",
     textAlign: "center",
@@ -133,6 +152,8 @@ const styles = StyleSheet.create({
   inputTitle: {
     fontStyle: "normal",
     fontWeight: 500,
+    fontFamily: "Arial",
+    fontFamily: "Arial",
     fontSize: 30,
     lineHeight: 35,
     textAlign: "center",
@@ -144,10 +165,11 @@ const styles = StyleSheet.create({
   logIn: {
     fontStyle: "normal",
     fontWeight: 400,
+    fontFamily: "Arial",
     fontSize: 16,
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
-    marginBottom:144,
+    marginBottom: 144,
   },
 });
