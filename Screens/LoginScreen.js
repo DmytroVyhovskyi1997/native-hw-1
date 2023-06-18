@@ -16,14 +16,12 @@ import {
 
 import AppLoading from "expo-app-loading";
 
-
-
 const initialState = {
   email: "",
   password: "",
-}
+};
 
-export default function LoginScreen  ()  {
+export default function LoginScreen() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [isReady, setIsReady] = useState(false);
@@ -31,8 +29,8 @@ export default function LoginScreen  ()  {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state)
-    setState(initialState)
+    console.log(state);
+    setState(initialState);
   };
 
   const loadApplication = async () => {
@@ -41,11 +39,16 @@ export default function LoginScreen  ()  {
     });
     setIsReady(true);
   };
-  
 
   if (!isReady) {
-    return <AppLoading startAsync={loadApplication} onFinish={() => setIsReady(true)} onError={ console.war} />
-}
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onFinish={() => setIsReady(true)}
+        onError={console.war}
+      />
+    );
+  }
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
@@ -92,7 +95,12 @@ export default function LoginScreen  ()  {
               >
                 <Text style={styles.submitTitle}>Увійти</Text>
               </TouchableOpacity>
-              <Text style={{ ...styles.logIn }}>
+              <Text
+                style={{
+                  ...styles.logIn,
+                  marginBottom: isShowKeyboard ? 20 : 144,
+                }}
+              >
                 Немає акаунту? Зареєструватися
               </Text>
             </View>
@@ -101,7 +109,7 @@ export default function LoginScreen  ()  {
       </ImageBackground>
     </TouchableWithoutFeedback>
   );
-};
+}
 
 const styles = StyleSheet.create({
   form: {
@@ -153,7 +161,6 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: 500,
     fontFamily: "Arial",
-    fontFamily: "Arial",
     fontSize: 30,
     lineHeight: 35,
     textAlign: "center",
@@ -170,6 +177,5 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
-    marginBottom: 144,
   },
 });
