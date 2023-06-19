@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Font } from "expo";
+import * as Font from "expo-font";
+
 import {
   StyleSheet,
   Dimensions,
@@ -12,18 +13,18 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback,Button
 } from "react-native";
 
 import AppLoading from "expo-app-loading";
 
 const initialState = {
-  logIn: "",
+  login: "",
   email: "",
   password: "",
-};
+}
 
-export const RegistrationScreen = () => {
+export default function RegistrationScreen({navigation}) {
   const [image, setImage] = useState(null);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
@@ -38,7 +39,7 @@ export const RegistrationScreen = () => {
 
   const loadApplication = async () => {
     await Font.loadAsync({
-      "BebasNeue-Regular": require("../assets/fonts/BebasNeue-Regular.ttf"),
+      "BebasNeue-Regular": require("../../assets/fonts/BebasNeue-Regular.ttf"),
     });
     setIsReady(true);
   };
@@ -48,7 +49,7 @@ export const RegistrationScreen = () => {
       <AppLoading
         startAsync={loadApplication}
         onFinish={() => setIsReady(true)}
-        onError={console.war}
+        onError={console.warn}
       />
     );
   }
@@ -56,7 +57,7 @@ export const RegistrationScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
-        source={require("../assets/image/photo-bg.jpg")}
+        source={require("../../assets/image/photo-bg.jpg")}
         style={styles.image}
       >
         <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -72,7 +73,7 @@ export const RegistrationScreen = () => {
                     style={{ width: 120, height: 120, borderRadius: 16 }}
                   />
                   <Image
-                    source={require("../assets/image/add.jpg")}
+                    source={require("../../assets/image/add.jpg")}
                     style={styles.add}
                   />
                 </TouchableOpacity>
@@ -130,7 +131,10 @@ export const RegistrationScreen = () => {
                   marginBottom: isShowKeyboard ? 20 : 78,
                 }}
               >
-                Вже є акаунт? Увійти
+                <Button
+                  onPress={() => navigation.navigate("Login")}
+                  title="Вже є акаунт? Увійти"
+                />
               </Text>
             </View>
           </KeyboardAvoidingView>
@@ -228,5 +232,6 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
+    
   },
 });
