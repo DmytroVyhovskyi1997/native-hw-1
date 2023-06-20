@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as Font from "expo-font";
+
 
 import {
   StyleSheet,
@@ -15,7 +15,7 @@ import {
   TouchableWithoutFeedback,Button,
 } from "react-native";
 
-import AppLoading from "expo-app-loading";
+
 
 
 const initialState = {
@@ -26,7 +26,6 @@ const initialState = {
 export default function LoginScreen({navigation}) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [isReady, setIsReady] = useState(false);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -35,22 +34,6 @@ export default function LoginScreen({navigation}) {
     setState(initialState);
   };
 
-  const loadApplication = async () => {
-    await Font.loadAsync({
-      "BebasNeue-Regular": require("../../assets/fonts/BebasNeue-Regular.ttf"),
-    });
-    setIsReady(true);
-  };
-
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
-        onError={console.warn}
-      />
-    );
-  }
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
@@ -102,8 +85,9 @@ export default function LoginScreen({navigation}) {
                   ...styles.logIn,
                   marginBottom: isShowKeyboard ? 20 : 144,
                 }}
+                onPress={() => navigation.navigate("Registration")}
               >
-                <Button onPress={()=> navigation.navigate("Registration")} title="Немає акаунту? Зареєструватися" />  
+                Немає акаунту? Зареєструватися
               </Text>
             </View>
           </KeyboardAvoidingView>

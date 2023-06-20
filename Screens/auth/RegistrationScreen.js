@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as Font from "expo-font";
+
 
 import {
   StyleSheet,
@@ -28,7 +28,7 @@ export default function RegistrationScreen({navigation}) {
   const [image, setImage] = useState(null);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-  const [isReady, setIsReady] = useState(false);
+
 
   const keyboardHide = () => {
     setIsShowKeyboard(true);
@@ -37,22 +37,6 @@ export default function RegistrationScreen({navigation}) {
     setState(initialState);
   };
 
-  const loadApplication = async () => {
-    await Font.loadAsync({
-      "BebasNeue-Regular": require("../../assets/fonts/BebasNeue-Regular.ttf"),
-    });
-    setIsReady(true);
-  };
-
-  if (!isReady) {
-    return (
-      <AppLoading
-        startAsync={loadApplication}
-        onFinish={() => setIsReady(true)}
-        onError={console.warn}
-      />
-    );
-  }
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -130,11 +114,10 @@ export default function RegistrationScreen({navigation}) {
                   ...styles.logIn,
                   marginBottom: isShowKeyboard ? 20 : 78,
                 }}
+                onPress={() => navigation.navigate("Login")}
               >
-                <Button
-                  onPress={() => navigation.navigate("Login")}
-                  title="Вже є акаунт? Увійти"
-                />
+                Вже є акаунт? Увійти
+            
               </Text>
             </View>
           </KeyboardAvoidingView>

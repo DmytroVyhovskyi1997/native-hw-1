@@ -1,29 +1,37 @@
 
-import { StyleSheet, View } from 'react-native';
-import RegistrationScreen from "./Screens/auth/RegistrationScreen";
-import  LoginScreen  from "./Screens/auth/LoginScreen";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import * as Font from "expo-font";
 
-const AuthStack = createStackNavigator();
-const MainStack = createStackNavigator();
+import { StyleSheet, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { useRoute } from './helpers/useRoute'
+import AppLoading from "expo-app-loading";
+import { useState } from "react";
+
 
 export default function App() {
+  const [isReady, setIsReady] = useState(false);
+  
+   const loadApplication = async () => {
+     await Font.loadAsync({
+       "BebasNeue-Regular": require("./assets/fonts/BebasNeue-Regular.ttf"),
+     });
+     setIsReady(true);
+   };
 
+   if (!isReady) {
+     return (
+       <AppLoading
+         startAsync={loadApplication}
+         onFinish={() => setIsReady(true)}
+         onError={console.warn}
+       />
+     );
+   }
+  
+const routing = useRoute(null)
   return (
     <NavigationContainer>
-      <AuthStack.Navigator>
-        <AuthStack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <AuthStack.Screen
-          name="Registration"
-          component={RegistrationScreen}
-          options={{ headerShown: false }}
-        />
-      </AuthStack.Navigator>
+    {routing}
     </NavigationContainer>
   );
 }
