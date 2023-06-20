@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-
+import { useNavigation } from "@react-navigation/native";
 import {
   StyleSheet,
   Dimensions,
@@ -13,10 +13,9 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
-  TouchableWithoutFeedback,Button
+  TouchableWithoutFeedback,
 } from "react-native";
 
-import AppLoading from "expo-app-loading";
 
 const initialState = {
   login: "",
@@ -24,11 +23,10 @@ const initialState = {
   password: "",
 }
 
-export default function RegistrationScreen({navigation}) {
+export default function RegistrationScreen({ navigation }) {
   const [image, setImage] = useState(null);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
-
 
   const keyboardHide = () => {
     setIsShowKeyboard(true);
@@ -36,7 +34,6 @@ export default function RegistrationScreen({navigation}) {
     console.log(state);
     setState(initialState);
   };
-
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -107,7 +104,14 @@ export default function RegistrationScreen({navigation}) {
                 activeOpacity={0.8}
                 onPress={keyboardHide}
               >
-                <Text style={styles.submitTitle}>Зареєструватися</Text>
+                <Text
+                  style={styles.submitTitle}
+                  onPress={() =>
+                    navigation.navigate("Home", { screen: "Post" })
+                  }
+                >
+                  Зареєструватися
+                </Text>
               </TouchableOpacity>
               <Text
                 style={{
@@ -117,7 +121,6 @@ export default function RegistrationScreen({navigation}) {
                 onPress={() => navigation.navigate("Login")}
               >
                 Вже є акаунт? Увійти
-            
               </Text>
             </View>
           </KeyboardAvoidingView>
@@ -125,7 +128,8 @@ export default function RegistrationScreen({navigation}) {
       </ImageBackground>
     </TouchableWithoutFeedback>
   );
-};
+}
+
 
 const styles = StyleSheet.create({
   form: {

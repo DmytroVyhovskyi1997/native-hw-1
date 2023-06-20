@@ -1,13 +1,14 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import {useRoute} from '../helpers/useRoute'
+const Stack = createStackNavigator();
 
-export const Home = () => {
+export function Home() {
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={useRoute} />
+    </Stack.Navigator>
   );
-};
+}
 
 styles = StyleSheet.create({
   container: {
