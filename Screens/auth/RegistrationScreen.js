@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useNavigation } from "@react-navigation/native";
+
 import {
   StyleSheet,
   Dimensions,
@@ -27,6 +27,7 @@ export default function RegistrationScreen({ navigation }) {
   const [image, setImage] = useState(null);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+
 
   const keyboardHide = () => {
     setIsShowKeyboard(true);
@@ -106,9 +107,6 @@ export default function RegistrationScreen({ navigation }) {
               >
                 <Text
                   style={styles.submitTitle}
-                  onPress={() =>
-                    navigation.navigate("Home", { screen: "Post" })
-                  }
                 >
                   Зареєструватися
                 </Text>

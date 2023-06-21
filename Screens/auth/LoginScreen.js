@@ -32,6 +32,7 @@ export default function LoginScreen({navigation}) {
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
+    navigation.navigate("Post");
   };
 
   return (
@@ -78,7 +79,12 @@ export default function LoginScreen({navigation}) {
                 activeOpacity={0.8}
                 onPress={keyboardHide}
               >
-                <Text style={styles.submitTitle}>Увійти</Text>
+                <Text
+                  style={styles.submitTitle}
+                
+                >
+                  Увійти
+                </Text>
               </TouchableOpacity>
               <Text
                 style={{
