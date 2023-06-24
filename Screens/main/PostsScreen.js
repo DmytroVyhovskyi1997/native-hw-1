@@ -13,13 +13,22 @@ export const PostsScreen = ({ route }) => {
     <View style={styles.container}>
       <FlatList
         data={posts}
-        keyExtractor={(item, indx) => indx.toString()}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View>
-            <Image source={{ uri: item.photo }} />
+          <View
+            style={{
+              marginBottom: 10,
+              marginTop: 32,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={{ uri: item.photo }}
+              style={{ width: 350, height: 200 }}
+            />
           </View>
         )}
-        style={{ width: 350, height: 200 }}
       />
     </View>
   );

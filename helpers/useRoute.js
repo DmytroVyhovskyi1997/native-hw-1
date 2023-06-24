@@ -38,7 +38,7 @@ export const routeComponent = (isAuth) => {
       screenOptions={{
         tabBarStyle: {
           alignItems: "center",
-          paddingHorizontal: 80,
+          paddingHorizontal: 60,
           paddingTop: 20,
           height: 120,
         },

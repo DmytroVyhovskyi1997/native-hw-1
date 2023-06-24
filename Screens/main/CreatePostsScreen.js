@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; 
 import { Camera } from "expo-camera";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {  TouchableOpacity } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
 
 export const CreatePostsScreen = ({navigation}) => {
@@ -25,22 +25,26 @@ export const CreatePostsScreen = ({navigation}) => {
     <View style={styles.container}>
       <Camera style={styles.camera} ref={setCamera}>
         <View style={styles.takePhotoContainer}>
-          {photo  && 
+          {photo && (
             <Image source={{ uri: photo }} style={styles.previewImage} />
-          }
+          )}
         </View>
         <TouchableOpacity style={styles.iconCamera} onPress={takePhoto}>
           <Ionicons name="camera" size={24} color="white" />
         </TouchableOpacity>
       </Camera>
-
-      <TouchableOpacity
-        style={styles.submitBtn}
-        activeOpacity={0.8}
-        onPress={sendPhoto}
-      >
-        <Text style={styles.submitTitle}>Опубліковати</Text>
-      </TouchableOpacity>
+      <Text style={styles.title}>Завантажте фото</Text>
+      <View>
+        <TextInput placeholder="Назва" style={styles.input} />
+        <TextInput placeholder="Місцевість" style={styles.inputTitle} />
+        <TouchableOpacity
+          style={styles.submitBtn}
+          activeOpacity={0.8}
+          onPress={sendPhoto}
+        >
+          <Text style={styles.submitTitle}>Опубліковати</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -50,11 +54,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   camera: {
-    width: 343,
     height: 240,
     marginTop: 32,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginLeft: 16,
+    marginRight: 20,
   },
   iconCamera: {
     alignItems: "center",
@@ -68,7 +71,6 @@ const styles = StyleSheet.create({
   },
   takePhotoContainer: {
     position: "absolute",
-    width: 343,
     height: 240,
     borderColor: "#fff",
     borderWidth: 2,
@@ -93,5 +95,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     color: "#FFFFFF",
     textAlign: "center",
+  },
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#E8E8E8",
+    marginLeft: 16,
+    marginRight: 16,
+    marginTop: 32,
+    paddingTop: 16,
+    paddingBottom: 15,
+    fontSize: 16,
+  },
+  title: {
+    marginLeft: 16,
+    marginTop: 8,
+    fontSize: 16,
+    color: "#BDBDBD",
+  },
+  inputTitle: {
+    color: "#BDBDBD",
+    marginLeft: 16,
+    marginTop: 29,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#E8E8E8",
   },
 });
