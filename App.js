@@ -1,8 +1,6 @@
-import * as Font from "expo-font";
-
-import { StyleSheet, View } from "react-native";
+import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
-import { useRoute } from "./helpers/useRoute";
+import { routeComponent } from "./helpers/useRoute";
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
 
@@ -10,7 +8,7 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
 
   const loadApplication = async () => {
-    await Font.loadAsync({
+    await useFonts({
       "BebasNeue-Regular": require("./assets/fonts/BebasNeue-Regular.ttf"),
     });
     setIsReady(true);
@@ -28,6 +26,6 @@ export default function App() {
 
   const isAuth = true;
 
-  const routing = useRoute(isAuth);
+  const routing = routeComponent(isAuth);
   return <NavigationContainer>{routing}</NavigationContainer>;
 }

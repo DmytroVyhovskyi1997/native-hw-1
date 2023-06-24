@@ -15,7 +15,7 @@ import { View, TouchableOpacity } from "react-native";
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-export const useRoute = (isAuth) => {
+export const routeComponent = (isAuth) => {
   if (!isAuth) {
     return (
       <AuthStack.Navigator>
