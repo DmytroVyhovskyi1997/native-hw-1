@@ -1,16 +1,16 @@
 import { View, Text, StyleSheet, Image, TextInput } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; 
+import { Ionicons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
-import {  TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
 
-export const CreatePostsScreen = ({navigation}) => {
+export const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
-   const [location, setLocation] = useState(null);
-   const [errorMsg, setErrorMsg] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -25,20 +25,18 @@ export const CreatePostsScreen = ({navigation}) => {
     })();
   }, []);
 
-
   const takePhoto = async () => {
     const photo = await camera.takePictureAsync();
     setPhoto(photo.uri);
   };
 
   const sendPhoto = () => {
-    navigation.navigate("Post", {photo})
-  }
+    navigation.navigate("DefaultScreen", { photo });
+  };
 
   const takeLocation = () => {
     navigation.navigate("Profile");
-  }
-  
+  };
 
   return (
     <View style={styles.container}>
@@ -57,15 +55,14 @@ export const CreatePostsScreen = ({navigation}) => {
         <TextInput placeholder="Назва" style={styles.input} />
 
         <TextInput placeholder="Місцевість" style={styles.inputTitle} />
-    
-          <EvilIcons
-            style={styles.iconLocation}
-            name="location"
-            size={24}
-            color="#BDBDBD"
-            onPress={takeLocation}
-          />
 
+        <EvilIcons
+          style={styles.iconLocation}
+          name="location"
+          size={24}
+          color="#BDBDBD"
+          onPress={takeLocation}
+        />
 
         <TouchableOpacity
           style={styles.submitBtn}
@@ -143,7 +140,7 @@ const styles = StyleSheet.create({
     color: "#BDBDBD",
   },
   inputTitle: {
-position:"relative",
+    position: "relative",
     marginLeft: 44,
     marginTop: 29,
     paddingBottom: 15,
@@ -153,6 +150,6 @@ position:"relative",
   iconLocation: {
     position: "absolute",
     bottom: 127,
-    marginLeft:14,
-  }
+    marginLeft: 14,
+  },
 });

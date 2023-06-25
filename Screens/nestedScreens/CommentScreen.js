@@ -1,11 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-
-export const Home = () => {
+export const CommentScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
+      <Text>CommentScreen</Text>
     </View>
   );
 };
