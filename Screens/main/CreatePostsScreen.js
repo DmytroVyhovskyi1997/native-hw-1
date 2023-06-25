@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; 
+import { EvilIcons } from "@expo/vector-icons";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
 import {  TouchableOpacity } from "react-native-gesture-handler";
@@ -33,6 +34,10 @@ export const CreatePostsScreen = ({navigation}) => {
   const sendPhoto = () => {
     navigation.navigate("Post", {photo})
   }
+
+  const takeLocation = () => {
+    navigation.navigate("Profile");
+  }
   
 
   return (
@@ -50,7 +55,18 @@ export const CreatePostsScreen = ({navigation}) => {
       <Text style={styles.title}>Завантажте фото</Text>
       <View>
         <TextInput placeholder="Назва" style={styles.input} />
+
         <TextInput placeholder="Місцевість" style={styles.inputTitle} />
+    
+          <EvilIcons
+            style={styles.iconLocation}
+            name="location"
+            size={24}
+            color="#BDBDBD"
+            onPress={takeLocation}
+          />
+
+
         <TouchableOpacity
           style={styles.submitBtn}
           activeOpacity={0.8}
@@ -127,11 +143,16 @@ const styles = StyleSheet.create({
     color: "#BDBDBD",
   },
   inputTitle: {
-   
-    marginLeft: 16,
+position:"relative",
+    marginLeft: 44,
     marginTop: 29,
     paddingBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#E8E8E8",
   },
+  iconLocation: {
+    position: "absolute",
+    bottom: 127,
+    marginLeft:14,
+  }
 });
