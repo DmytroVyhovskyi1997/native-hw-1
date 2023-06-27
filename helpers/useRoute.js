@@ -1,7 +1,7 @@
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-
+import { AntDesign } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -11,6 +11,7 @@ import { PostsScreen } from "../Screens/main/PostsScreen";
 import { CreatePostsScreen } from "../Screens/main/CreatePostsScreen";
 import { ProfileScreen } from "../Screens/main/ProfileScreen";
 import { View, TouchableOpacity } from "react-native";
+import { CommentScreen } from "../Screens/nestedScreens/CommentScreen";
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -55,6 +56,7 @@ export const routeComponent = (isAuth) => {
             lineHeight: 22,
             letterSpacing: -0.408,
           },
+
           headerRight: () => {
             return (
               <TouchableOpacity
@@ -89,13 +91,23 @@ export const routeComponent = (isAuth) => {
           },
         }}
       />
-
       <MainTab.Screen
         name="Create"
         component={CreatePostsScreen}
         options={{
           title: "Створити публікацію",
           tabBarShowLabel: false,
+          headerLeft: () => {
+            return (
+              <TouchableOpacity
+                style={{
+                  marginLeft: 18,
+                }}
+              >
+                <AntDesign name="arrowleft" size={24} color="black" />
+              </TouchableOpacity>
+            );
+          },
           tabBarIcon: ({ focused }) => {
             return (
               <View

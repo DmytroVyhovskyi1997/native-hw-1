@@ -1,16 +1,18 @@
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useState, useEffect } from "react";
 
 export const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [photoName, setPhotoName] = useState("");
+  const [photoLocation, setPhotoLocation] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -31,7 +33,7 @@ export const CreatePostsScreen = ({ navigation }) => {
   };
 
   const sendPhoto = () => {
-    navigation.navigate("DefaultScreen", { photo });
+    navigation.navigate("DefaultScreen", { photo, photoName, photoLocation });
   };
 
   const takeLocation = () => {
@@ -52,9 +54,19 @@ export const CreatePostsScreen = ({ navigation }) => {
       </Camera>
       <Text style={styles.title}>Завантажте фото</Text>
       <View>
-        <TextInput placeholder="Назва" style={styles.input} />
+        <TextInput
+          placeholder="Назва"
+          style={styles.input}
+          value={photoName}
+          onChangeText={setPhotoName}
+        />
 
-        <TextInput placeholder="Місцевість" style={styles.inputTitle} />
+        <TextInput
+          placeholder="Місцевість"
+          style={styles.inputTitle}
+          value={photoLocation}
+          onChangeText={setPhotoLocation}
+        />
 
         <EvilIcons
           style={styles.iconLocation}
