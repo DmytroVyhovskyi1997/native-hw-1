@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { ProfileScreen } from "../main/ProfileScreen";
 
 export const MapScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>MapScreen</Text>
+     <ProfileScreen/>
     </View>
   );
 };
@@ -13,6 +14,5 @@ styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
   },
 });

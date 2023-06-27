@@ -16,7 +16,7 @@ export const DefaultScreen = ({ route, navigation }) => {
   }, [route.params]);
 
   const takeLocation = () => {
-    navigation.navigate("Profile");
+    navigation.navigate("MapScreen");
   };
   const takeComments = () => {
     navigation.navigate("CommentScreen");
