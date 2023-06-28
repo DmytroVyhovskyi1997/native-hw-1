@@ -3,6 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { routeComponent } from "./helpers/useRoute";
 import AppLoading from "expo-app-loading";
 import { useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -24,8 +26,12 @@ export default function App() {
     );
   }
 
-  const isAuth = true;
+  const isAuth = false;
 
   const routing = routeComponent(isAuth);
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <Provider store={store}>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </Provider>
+  );
 }
