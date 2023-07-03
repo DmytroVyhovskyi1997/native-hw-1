@@ -15,6 +15,7 @@ export const Main = () => {
     dispatch(authStateChangeUser());
   }, []);
 
+ 
   const routing = routeComponent(stateChange);
 
     return (<NavigationContainer>{routing}</NavigationContainer>);

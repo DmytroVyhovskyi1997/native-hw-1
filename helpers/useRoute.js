@@ -4,19 +4,29 @@ import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import { useDispatch } from "react-redux";
 import RegistrationScreen from "../Screens/auth/RegistrationScreen";
 import LoginScreen from "../Screens/auth/LoginScreen";
 import { PostsScreen } from "../Screens/main/PostsScreen";
 import { CreatePostsScreen } from "../Screens/main/CreatePostsScreen";
 import { ProfileScreen } from "../Screens/main/ProfileScreen";
 import { View, TouchableOpacity } from "react-native";
-import { CommentScreen } from "../Screens/nestedScreens/CommentScreen";
+import { auth } from "../firebase/config";
+import { authSingOutUser } from "../redux/auth/authOperation"; 
+
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
 export const routeComponent = (isAuth) => {
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    try {
+      await dispatch(authSingOutUser());
+    } catch (error) {
+      console.log("Error occurred during logout:", error);
+    }
+  };
   if (!isAuth) {
     return (
       <AuthStack.Navigator>
@@ -63,6 +73,7 @@ export const routeComponent = (isAuth) => {
                 style={{
                   marginRight: 18,
                 }}
+                onPress={handleLogout}
               >
                 <Ionicons name="log-out-outline" size={24} color="black" />
               </TouchableOpacity>

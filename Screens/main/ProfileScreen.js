@@ -1,6 +1,6 @@
 import React from "react";
 import MapView, { Marker } from "react-native-maps";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 export const ProfileScreen = () => {
   const location = { latitude: 49.8397, longitude: 24.0297 };
