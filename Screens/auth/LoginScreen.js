@@ -15,7 +15,8 @@ import {
   TouchableWithoutFeedback,Button,
 } from "react-native";
 
-
+import { useDispatch } from "react-redux";
+import { authSingInUser } from "../../redux/auth/authOperation";
 
 
 const initialState = {
@@ -27,12 +28,13 @@ export default function LoginScreen({navigation}) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
+   const dispatch = useDispatch();
+
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+    dispatch(authSingInUser(state));
     setState(initialState);
-    navigation.navigate("Post");
   };
 
   return (

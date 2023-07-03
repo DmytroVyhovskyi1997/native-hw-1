@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 import {
   StyleSheet,
   Dimensions,
@@ -16,6 +15,11 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
+import {useDispatch} from 'react-redux'
+
+import { authSingUpUser } from "../../redux/auth/authOperation";
+import firebase from "../../firebase/config";
+
 
 const initialState = {
   login: "",
@@ -28,11 +32,13 @@ export default function RegistrationScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
+  const dispatch = useDispatch();
+
 
   const keyboardHide = () => {
     setIsShowKeyboard(true);
     Keyboard.dismiss();
-    console.log(state);
+    dispatch(authSingUpUser(state))
     setState(initialState);
   };
 

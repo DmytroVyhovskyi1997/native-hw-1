@@ -1,20 +1,26 @@
 import { useFonts } from "expo-font";
-import { NavigationContainer } from "@react-navigation/native";
-import { routeComponent } from "./helpers/useRoute";
+
 import AppLoading from "expo-app-loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import { Main } from "./component/Main";
+
+
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
 
-  const loadApplication = async () => {
-    await useFonts({
-      "BebasNeue-Regular": require("./assets/fonts/BebasNeue-Regular.ttf"),
-    });
-    setIsReady(true);
-  };
+    const loadApplication = async () => {
+      await useFonts({
+        "BebasNeue-Regular": require("./assets/fonts/BebasNeue-Regular.ttf"),
+      });
+      setIsReady(true);
+    };
+  
+   useEffect(() => {
+     loadApplication();
+   }, []);
 
   if (!isReady) {
     return (
@@ -25,13 +31,10 @@ export default function App() {
       />
     );
   }
-
-  const isAuth = false;
-
-  const routing = routeComponent(isAuth);
+  
   return (
     <Provider store={store}>
-      <NavigationContainer>{routing}</NavigationContainer>
+      <Main/>
     </Provider>
   );
 }
