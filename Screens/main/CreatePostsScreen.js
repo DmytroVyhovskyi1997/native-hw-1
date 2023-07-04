@@ -5,6 +5,10 @@ import { EvilIcons } from "@expo/vector-icons";
 import { Camera } from "expo-camera";
 import * as Location from "expo-location";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { db, storage } from "../../firebase/config";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+
 
 export const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
@@ -33,12 +37,23 @@ export const CreatePostsScreen = ({ navigation }) => {
   };
 
   const sendPhoto = () => {
+    uploadPhotoToServer();
     navigation.navigate("DefaultScreen", { photo, photoName, photoLocation });
   };
 
   const takeLocation = () => {
     navigation.navigate("Profile");
   };
+
+  const uploadPhotoToServer = async() => {
+       const response = await fetch(photo);
+       const file = await response.blob();
+       const uniquePostId = Date.now().toString();
+       const storageImage = await ref(storage, `postImage/${uniquePostId}`);
+       await uploadBytes(storageImage, file);
+       const addedPhoto = await getDownloadURL(storageImage);
+       return addedPhoto;
+  }
 
   return (
     <View style={styles.container}>

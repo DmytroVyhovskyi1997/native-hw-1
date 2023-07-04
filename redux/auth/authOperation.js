@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from '../../firebase/config';
 import { authSlice } from './authReducer';
-const { authSingOut } = authSlice.actions;
+const { updateUserProfile, authSingOut, authStateChange } = authSlice.actions;
 
 
 export const authSingUpUser =
@@ -28,7 +28,7 @@ export const authSingUpUser =
         nickName: displayName,
       };
 
-      dispatch(authSlice.actions.updateUserProfile(userUpdateProfile));
+      dispatch(updateUserProfile(userUpdateProfile));
 
     } catch (error) {
       console.log(error);
@@ -60,8 +60,8 @@ export const authStateChangeUser = () => async (dispatch, getState) => {
         userId: user.uid,
         nickName: user.displayName,
       };
-      dispatch(authSlice.actions.authStateChange({ stateChange: true }));
-      dispatch(authSlice.actions.updateUserProfile(userUpdateProfile));
+      dispatch(authStateChange({ stateChange: true }));
+      dispatch(updateUserProfile(userUpdateProfile));
     }
   });
 };
