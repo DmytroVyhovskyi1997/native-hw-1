@@ -15,17 +15,16 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 
 import { authSingUpUser } from "../../redux/auth/authOperation";
 import firebase from "../../firebase/config";
-
 
 const initialState = {
   login: "",
   email: "",
   password: "",
-}
+};
 
 export default function RegistrationScreen({ navigation }) {
   const [image, setImage] = useState(null);
@@ -34,11 +33,10 @@ export default function RegistrationScreen({ navigation }) {
 
   const dispatch = useDispatch();
 
-
   const keyboardHide = () => {
     setIsShowKeyboard(true);
     Keyboard.dismiss();
-    dispatch(authSingUpUser(state))
+    dispatch(authSingUpUser(state));
     setState(initialState);
   };
 
@@ -111,11 +109,7 @@ export default function RegistrationScreen({ navigation }) {
                 activeOpacity={0.8}
                 onPress={keyboardHide}
               >
-                <Text
-                  style={styles.submitTitle}
-                >
-                  Зареєструватися
-                </Text>
+                <Text style={styles.submitTitle}>Зареєструватися</Text>
               </TouchableOpacity>
               <Text
                 style={{
@@ -133,7 +127,6 @@ export default function RegistrationScreen({ navigation }) {
     </TouchableWithoutFeedback>
   );
 }
-
 
 const styles = StyleSheet.create({
   form: {
@@ -223,6 +216,5 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
-    
   },
 });

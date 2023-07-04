@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
+import { db } from "../../firebase/config";
+
+import { collection, query, onSnapshot } from "firebase/firestore";
 
 export const DefaultScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    if (route.params) {
-      const { photo, photoName, photoLocation } = route.params;
-      setPosts((prevState) => [
-        ...prevState,
-        { photo, photoName, photoLocation },
-      ]);
-    }
-  }, [route.params]);
+  const getAllPost = async () => {
+    const postsRef = query(collection(db, "post"));
+    onSnapshot(postsRef, (snapshot) => {
+      setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    });
+  };
 
-  const takeLocation = () => {
-    navigation.navigate("MapScreen");
-  };
-  const takeComments = () => {
-    navigation.navigate("CommentScreen");
-  };
+  useEffect(() => {
+    getAllPost();
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -35,7 +33,12 @@ export const DefaultScreen = ({ route, navigation }) => {
                 name="comment"
                 size={24}
                 color="#BDBDBD"
-                onPress={takeComments}
+                onPress={() =>
+                  navigation.navigate("CommentScreen", {
+                    postId: item.id,
+                    photo: item.photo,
+                  })
+                }
               />
               <View style={styles.locationBox}>
                 <EvilIcons
@@ -43,7 +46,11 @@ export const DefaultScreen = ({ route, navigation }) => {
                   name="location"
                   size={24}
                   color="#BDBDBD"
-                  onPress={takeLocation}
+                  onPress={() =>
+                    navigation.navigate("MapScreen", {
+                      location: item.location,
+                    })
+                  }
                 />
                 <Text style={styles.postLocation}>{item.photoLocation}</Text>
               </View>

@@ -14,8 +14,7 @@ export const authSlice = createSlice({
     authStateChange: (state, { payload }) => ({
       ...state,
       stateChange: payload.stateChange,
-      }),
-      authSingOut: (() => 
-        state)
+    }),
+    authSingOut: () => state,
   },
 });

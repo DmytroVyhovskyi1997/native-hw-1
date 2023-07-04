@@ -12,8 +12,7 @@ import { CreatePostsScreen } from "../Screens/main/CreatePostsScreen";
 import { ProfileScreen } from "../Screens/main/ProfileScreen";
 import { View, TouchableOpacity } from "react-native";
 import { auth } from "../firebase/config";
-import { authSingOutUser } from "../redux/auth/authOperation"; 
-
+import { authSingOutUser } from "../redux/auth/authOperation";
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();

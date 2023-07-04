@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 import {
   StyleSheet,
   Dimensions,
@@ -12,23 +11,23 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
-  TouchableWithoutFeedback,Button,
+  TouchableWithoutFeedback,
+  Button,
 } from "react-native";
 
 import { useDispatch } from "react-redux";
 import { authSingInUser } from "../../redux/auth/authOperation";
-
 
 const initialState = {
   email: "",
   password: "",
 };
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -81,12 +80,7 @@ export default function LoginScreen({navigation}) {
                 activeOpacity={0.8}
                 onPress={keyboardHide}
               >
-                <Text
-                  style={styles.submitTitle}
-                
-                >
-                  Увійти
-                </Text>
+                <Text style={styles.submitTitle}>Увійти</Text>
               </TouchableOpacity>
               <Text
                 style={{

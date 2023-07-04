@@ -6,21 +6,19 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { Main } from "./component/Main";
 
-
-
 export default function App() {
   const [isReady, setIsReady] = useState(false);
 
-    const loadApplication = async () => {
-      await useFonts({
-        "BebasNeue-Regular": require("./assets/fonts/BebasNeue-Regular.ttf"),
-      });
-      setIsReady(true);
-    };
-  
-   useEffect(() => {
-     loadApplication();
-   }, []);
+  const loadApplication = async () => {
+    await useFonts({
+      "BebasNeue-Regular": require("./assets/fonts/BebasNeue-Regular.ttf"),
+    });
+    setIsReady(true);
+  };
+
+  useEffect(() => {
+    loadApplication();
+  }, []);
 
   if (!isReady) {
     return (
@@ -31,10 +29,10 @@ export default function App() {
       />
     );
   }
-  
+
   return (
     <Provider store={store}>
-      <Main/>
+      <Main />
     </Provider>
   );
 }
