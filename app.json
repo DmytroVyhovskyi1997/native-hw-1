@@ -21,6 +21,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.dmytrokokoko.AwesomeProject"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7253c177-bd22-4fe0-8506-5e0832d7f6cb"
       }
     }
   }
